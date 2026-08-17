@@ -1,0 +1,24 @@
+sources:
+  repo:
+    type: codeup
+    endpoint: zjw
+    branch: main
+
+stages:
+  - name: 构建镜像
+    jobs:
+      - step: ImageBuildAndPush
+        name: 构建并推送作品集镜像
+        inputs:
+          docker_file_path: Dockerfile
+          repository: zjw-portfolio
+          tag: ${DATETIME}
+  - name: 部署ECS
+    jobs:
+      - step: HostDeploy
+        name: 更新作品集容器
+        inputs:
+          host_group: mini4wd-ecs
+          script: |
+            cd /data/zjw
+            IP_PREVIEW=1 WEB_ONLY=1 ./deploy-ecs.sh ${DATETIME}
