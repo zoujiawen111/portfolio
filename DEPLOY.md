@@ -32,12 +32,14 @@ chmod +x deploy-ecs.sh
 
 ```bash
 APP_NAME=zjw-portfolio
-WEB_IMAGE=registry.cn-shanghai.aliyuncs.com/your-namespace/zjw-portfolio
+ACR_REGISTRY=crpi-p2dcj2mrstp0zb9w-vpc.cn-shanghai.personal.cr.aliyuncs.com
+ACR_NAMESPACE=pandasealler
+WEB_IMAGE=zjw-portfolio
 WEB_TAG=latest
 HOST_PORT=0.0.0.0:3500
 ```
 
-只需要把 `WEB_IMAGE` 改成云效“镜像构建并推送至 ACR”任务推送到的镜像仓库地址。`WEB_TAG` 会由流水线传入的 `${DATETIME}` 自动更新。
+`WEB_IMAGE` 要和云效“镜像构建并推送至 ACR”任务里的仓库名一致。`WEB_TAG` 会由流水线传入的 `${DATETIME}` 自动更新。
 
 安全组开放 TCP `3500` 后，可以直接访问：
 
