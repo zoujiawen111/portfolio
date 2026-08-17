@@ -1,0 +1,7 @@
+services:
+  web:
+    image: ${WEB_IMAGE}:${WEB_TAG}
+    container_name: ${APP_NAME}
+    restart: always
+    ports:
+      - "${HOST_PORT}:80"
