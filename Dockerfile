@@ -7,7 +7,7 @@ RUN npm config set registry https://registry.npmmirror.com
 RUN npm ci
 
 COPY . .
-ARG VITE_BASE_PATH=/portfolio/
+ARG VITE_BASE_PATH=/
 ENV VITE_BASE_PATH=$VITE_BASE_PATH
 RUN npm run build
 
