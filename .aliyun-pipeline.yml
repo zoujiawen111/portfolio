@@ -11,7 +11,7 @@ stages:
         name: 构建并推送作品集镜像
         inputs:
           docker_file_path: Dockerfile
-          repository: zjw-portfolio
+          repository: zjw
           tag: ${DATETIME}
   - name: 部署ECS
     jobs:

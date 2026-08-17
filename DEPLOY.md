@@ -34,7 +34,7 @@ chmod +x deploy-ecs.sh
 APP_NAME=zjw-portfolio
 ACR_REGISTRY=crpi-p2dcj2mrstp0zb9w-vpc.cn-shanghai.personal.cr.aliyuncs.com
 ACR_NAMESPACE=pandasealler
-WEB_IMAGE=zjw-portfolio
+WEB_IMAGE=zjw
 WEB_TAG=latest
 HOST_PORT=0.0.0.0:3500
 ```
