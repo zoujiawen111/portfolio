@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0C0C0C;
+  --color-mist: #D7E2EA;
+  --color-steel: #646973;
+  --color-ice: #BBCCD7;
+  --color-deepPurple: #18011F;
+  --color-magenta: #B600A8;
+  --color-violet: #7621B0;
+  --color-warmOrange: #BE4C00;
+  --color-electricBlue: #2D9CFF;
+  --font-display: "Kanit", "Noto Sans SC", system-ui, sans-serif;
+  --font-sans: "Kanit", "Noto Sans SC", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #0C0C0C;
+  font-family: "Kanit", "Noto Sans SC", system-ui, sans-serif;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  opacity: 0.12;
+  mix-blend-mode: soft-light;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.32) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.section-pad {
+  padding-top: clamp(5rem, 9vw, 8rem);
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+.hero-title {
+  font-size: clamp(4.2rem, 9vw, 8rem);
+}
+
+.nav-link {
+  transition: color 180ms ease;
+}
+
+.nav-link:hover {
+  color: #D7E2EA;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid #2D9CFF;
+  outline-offset: 4px;
+}
+
+.project-card {
+  border: 1px solid rgba(215, 226, 234, 0.12);
+  background: rgba(215, 226, 234, 0.035);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  transition: border-color 240ms ease, background 240ms ease, transform 240ms ease;
+}
+
+.project-card:hover {
+  border-color: rgba(182, 0, 168, 0.55);
+  background: rgba(215, 226, 234, 0.055);
+  transform: translateY(-2px);
+}
+
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: clamp(3.1rem, 20vw, 4.8rem);
+  }
+}
