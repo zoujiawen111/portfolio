@@ -21,4 +21,4 @@ stages:
           host_group: mini4wd-ecs
           script: |
             cd /data/zjw
-            IP_PREVIEW=1 WEB_ONLY=1 ./deploy-ecs.sh ${DATETIME}
+            IP_PREVIEW=1 WEB_ONLY=1 bash ./deploy-ecs.sh ${DATETIME}

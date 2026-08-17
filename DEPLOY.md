@@ -6,7 +6,7 @@
 
 ```bash
 cd /data/zjw
-WEB_ONLY=1 ./deploy-ecs.sh ${DATETIME}
+WEB_ONLY=1 bash ./deploy-ecs.sh ${DATETIME}
 ```
 
 镜像地址放在 ECS 的 `/data/zjw/.env` 中，由 `deploy-ecs.sh` 读取。
