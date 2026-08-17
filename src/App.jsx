@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import {
   abilities,
+  assetPath,
   contacts,
   education,
   others,
@@ -342,7 +343,7 @@ function Contact() {
                 <p className="text-sm text-mist/45">微信</p>
                 <p className="mt-2 text-lg font-bold text-ice">{contacts.wechat}</p>
               </div>
-              <img className="h-12 w-12 opacity-90" src="/assets/wx.svg" alt="" aria-hidden="true" />
+              <img className="h-12 w-12 opacity-90" src={assetPath("assets/wx.svg")} alt="" aria-hidden="true" />
             </div>
           </div>
         </div>

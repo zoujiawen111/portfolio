@@ -1,3 +1,9 @@
+const baseUrl = import.meta.env.BASE_URL || "/";
+
+export function assetPath(path) {
+  return `${baseUrl}${path.replace(/^\/+/, "")}`;
+}
+
 export const profile = {
   name: "邹佳文",
   englishName: "Zou Jiawen",
@@ -5,7 +11,7 @@ export const profile = {
   city: "上海",
   experience: "8年",
   birthday: "1996.11",
-  avatar: "/assets/profile.jpg",
+  avatar: assetPath("assets/profile.jpg"),
   tags: ["运动爱好者", "旅行上瘾者", "斜杠青年", "人间干饭人"],
   slogan: "连接业务与用户，设计更好的体验。"
 };
@@ -16,8 +22,8 @@ export const projects = [
     name: "零售 POS从 0-1 自研建设",
     type: "ToB 零售业务系统 · 移动端 POS · 复杂业务体验设计",
     time: "2023.02 - 2024.12",
-    cover: "/assets/project1.jpg",
-    pdf: "/pdfs/POS.pdf",
+    cover: assetPath("assets/project1.jpg"),
+    pdf: assetPath("pdfs/POS.pdf"),
     summary: "围绕零售门店交易、履约与资产流转，完成从业务流程梳理到移动端 POS 体验落地的系统化建设。"
   },
   {
@@ -25,8 +31,8 @@ export const projects = [
     name: "Joymel ToB 商城移动端体验建设",
     type: "ToB 企业商城 · 移动端 · 交易与资产体验设计",
     time: "2023.06 - 2024.08",
-    cover: "/assets/project2.jpg",
-    pdf: "/pdfs/joymel.pdf",
+    cover: assetPath("assets/project2.jpg"),
+    pdf: assetPath("pdfs/joymel.pdf"),
     summary: "面向企业商城交易链路，优化移动端下单、资产查看与业务协同体验，提升复杂业务在移动场景下的可用性。"
   },
   {
@@ -34,8 +40,8 @@ export const projects = [
     name: "AI Agent 平台从 0-1 体验建设",
     type: "AI 产品 · 企业级平台",
     time: "2026.04 - 2026.05",
-    cover: "/assets/project3.jpg",
-    pdf: "/pdfs/AI.pdf",
+    cover: assetPath("assets/project3.jpg"),
+    pdf: assetPath("pdfs/AI.pdf"),
     summary: "从企业级 AI Agent 平台的核心使用路径出发，构建设计框架、信息层级与关键任务体验。"
   }
 ];
