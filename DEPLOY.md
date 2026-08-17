@@ -34,15 +34,15 @@ chmod +x deploy-ecs.sh
 APP_NAME=zjw-portfolio
 WEB_IMAGE=registry.cn-shanghai.aliyuncs.com/your-namespace/zjw-portfolio
 WEB_TAG=latest
-HOST_PORT=0.0.0.0:7654
+HOST_PORT=0.0.0.0:3500
 ```
 
 只需要把 `WEB_IMAGE` 改成云效“镜像构建并推送至 ACR”任务推送到的镜像仓库地址。`WEB_TAG` 会由流水线传入的 `${DATETIME}` 自动更新。
 
-安全组开放 TCP `7654` 后，可以直接访问：
+安全组开放 TCP `3500` 后，可以直接访问：
 
 ```text
-http://101.133.154.163:7654/
+http://101.133.154.163:3500/
 ```
 
 ## 子路径部署
