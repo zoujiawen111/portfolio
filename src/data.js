@@ -39,7 +39,7 @@ export const projects = [
     id: "ai",
     name: "AI Agent 平台从 0-1 体验建设",
     type: "AI 产品 · 企业级平台",
-    time: "2026.04 - 2026.05",
+    time: "2026.03 - 2026.04",
     cover: assetPath("assets/project3.jpg"),
     pdf: assetPath("pdfs/AI.pdf"),
     summary: "从企业级 AI Agent 平台的核心使用路径出发，构建设计框架、信息层级与关键任务体验。"
