@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
   BriefcaseBusiness,
@@ -237,16 +237,45 @@ function SkillPanel({ title, items }) {
       <h3 className="mb-6 text-2xl font-bold text-ice">{title}</h3>
       <div className="space-y-5">
         {items.map(([name, value]) => (
-          <div key={name}>
-            <div className="mb-2 flex items-center justify-between gap-4 text-sm">
-              <span className="text-mist/78">{name}</span>
-              <span className="font-bold text-ice">{value}%</span>
-            </div>
-            <div className="h-2 bg-mist/10">
-              <div className="h-full bg-gradient-to-r from-steel to-ice" style={{ width: `${value}%` }} />
-            </div>
-          </div>
+          <SkillMeter key={name} name={name} value={value} />
         ))}
+      </div>
+    </div>
+  );
+}
+
+function SkillMeter({ name, value }) {
+  const meterRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = meterRef.current;
+    if (!node) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={meterRef} className="skill-meter group" style={{ "--skill-value": `${value}%` }}>
+      <div className="mb-2 flex items-center justify-between gap-4 text-sm">
+        <span className="text-mist/78 transition group-hover:text-ice">{name}</span>
+        <span className="font-bold text-ice">{value}%</span>
+      </div>
+      <div className="skill-track" aria-label={`${name} ${value}%`}>
+        <div className={`skill-fill ${isVisible ? "is-visible" : ""}`}>
+          <span className="skill-shine" />
+        </div>
       </div>
     </div>
   );

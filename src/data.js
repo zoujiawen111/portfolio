@@ -63,7 +63,7 @@ export const workExperience = [
   },
   {
     title: "UI 设计师",
-    company: "米居网络科技",
+    company: "精锐教育",
     time: "2018.06 - 2021.09",
     description:
       "负责教育类 Web 与移动端产品的 UI 及交互设计，参与教学、教务等核心产品改版，以及运营活动、视觉规范与组件体系建设，积累 C 端多端产品设计及跨团队协作经验。"

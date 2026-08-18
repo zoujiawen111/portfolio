@@ -76,6 +76,60 @@ a {
   transform: translateY(-2px);
 }
 
+.skill-meter {
+  --skill-value: 0%;
+}
+
+.skill-track {
+  position: relative;
+  height: 0.55rem;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(215, 226, 234, 0.08), rgba(215, 226, 234, 0.13)),
+    rgba(215, 226, 234, 0.08);
+}
+
+.skill-track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(215, 226, 234, 0.08);
+  pointer-events: none;
+}
+
+.skill-fill {
+  position: relative;
+  height: 100%;
+  width: 0;
+  overflow: hidden;
+  background: linear-gradient(90deg, #646973 0%, #BBCCD7 62%, #FFFFFF 100%);
+  box-shadow: 0 0 18px rgba(187, 204, 215, 0);
+  transition:
+    width 1.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 240ms ease;
+}
+
+.skill-fill.is-visible {
+  width: var(--skill-value);
+  box-shadow: 0 0 18px rgba(187, 204, 215, 0.2);
+}
+
+.skill-shine {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform: translateX(-120%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+}
+
+.skill-fill.is-visible .skill-shine {
+  animation: skill-shine 1.6s ease 0.35s both;
+}
+
+.skill-meter:hover .skill-fill {
+  box-shadow: 0 0 22px rgba(182, 0, 168, 0.24), 0 0 18px rgba(187, 204, 215, 0.2);
+}
+
 .animate-rise {
   animation: rise 0.7s cubic-bezier(0.25, 0.1, 0.25, 1) both;
 }
@@ -93,6 +147,16 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes skill-shine {
+  from {
+    transform: translateX(-120%);
+  }
+
+  to {
+    transform: translateX(120%);
   }
 }
 
