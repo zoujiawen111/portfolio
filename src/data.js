@@ -24,7 +24,7 @@ export const projects = [
     time: "2023.02 - 2024.12",
     cover: assetPath("assets/project1.jpg"),
     pdf: assetPath("pdfs/POS.pdf"),
-    summary: "围绕零售门店交易、履约与资产流转，完成从业务流程梳理到移动端 POS 体验落地的系统化建设。"
+    summary: "围绕零售门店交易与进销存业务，从业务调研、流程梳理到移动端 POS 体验落地，完成自研系统 0-1 建设。"
   },
   {
     id: "joymel",
