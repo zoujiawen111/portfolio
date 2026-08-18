@@ -16,6 +16,7 @@ import {
   assetPath,
   contacts,
   education,
+  earlyWorks,
   others,
   profile,
   projects,
@@ -34,7 +35,7 @@ const navItems = [
 function App() {
   const [activeProject, setActiveProject] = useState(null);
   const selectedProject = useMemo(
-    () => projects.find((project) => project.id === activeProject),
+    () => [...projects, ...earlyWorks].find((project) => project.id === activeProject),
     [activeProject]
   );
 
@@ -182,7 +183,44 @@ function Projects({ onSelect }) {
           </article>
         ))}
       </div>
+      <EarlyWorks onSelect={onSelect} />
     </div>
+  );
+}
+
+function EarlyWorks({ onSelect }) {
+  return (
+    <section className="mt-16">
+      <div className="mb-7 flex flex-col gap-3 border-t border-mist/12 pt-8 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="text-sm uppercase text-mist/45">Earlier Design Works</p>
+          <h3 className="mt-2 font-display text-[clamp(2.4rem,6vw,4.8rem)] font-black uppercase leading-[0.95] text-ice">
+            早期作品
+          </h3>
+        </div>
+        <p className="max-w-2xl text-sm leading-[1.8] text-mist/55">
+          补充展示更早期的 ToB、ToC、教育产品与视频制作经历，保留主作品集之外的设计跨度与多类型项目经验。
+        </p>
+      </div>
+      <div className="grid gap-5 lg:grid-cols-3">
+        {earlyWorks.map((work, index) => (
+          <article key={work.id} className="group border border-mist/12 bg-mist/[0.035] p-4 transition hover:border-magenta/55 hover:bg-mist/[0.055]">
+            <button className="block w-full overflow-hidden text-left" onClick={() => onSelect(work.id)} aria-label={`View ${work.name}`}>
+              <img src={work.cover} alt={`${work.name} cover`} className="aspect-[16/10] w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]" />
+            </button>
+            <div className="pt-5">
+              <p className="font-display text-4xl font-black text-mist/18">{String(index + 4).padStart(2, "0")}</p>
+              <p className="mt-3 text-xs text-mist/48">{work.type} / {work.time}</p>
+              <h4 className="mt-3 text-xl font-bold leading-[1.25] text-ice">{work.name}</h4>
+              <p className="mt-3 line-clamp-3 text-sm leading-[1.75] text-mist/60">{work.summary}</p>
+              <button className="focus-ring mt-5 inline-flex h-11 items-center justify-center border border-ice/25 px-4 text-sm font-semibold text-ice transition hover:border-magenta hover:text-white" onClick={() => onSelect(work.id)}>
+                View Work
+              </button>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -205,16 +243,50 @@ function ProjectDetail({ project, onBack }) {
           <p className="text-base leading-[1.8] text-mist/68">{project.summary}</p>
         </div>
       </div>
-      <div className="mt-6 border border-mist/12 bg-ink/80">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-mist/10 p-4">
-          <p className="text-sm text-mist/60">PDF 页面预览 / 项目详情内容纵向排列</p>
-          <a className="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-ice hover:text-white" href={project.pdf} target="_blank" rel="noreferrer">
-            Open PDF
-            <ExternalLink className="h-4 w-4" />
-          </a>
+      {(project.responsibility || project.result) && (
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {project.responsibility && (
+            <div className="border border-mist/12 bg-mist/[0.035] p-5">
+              <p className="text-sm text-mist/45">我负责的内容</p>
+              <p className="mt-3 text-sm leading-[1.8] text-mist/68">{project.responsibility}</p>
+            </div>
+          )}
+          {project.result && (
+            <div className="border border-mist/12 bg-mist/[0.035] p-5">
+              <p className="text-sm text-mist/45">亮点 / 成果</p>
+              <p className="mt-3 text-sm leading-[1.8] text-mist/68">{project.result}</p>
+            </div>
+          )}
         </div>
-        <iframe className="h-[78vh] min-h-[560px] w-full bg-ink" src={`${project.pdf}#toolbar=1&navpanes=0`} title={`${project.name} PDF`} />
-      </div>
+      )}
+      {project.pdf && (
+        <div className="mt-6 border border-mist/12 bg-ink/80">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-mist/10 p-4">
+            <p className="text-sm text-mist/60">PDF 页面预览 / 项目详情内容纵向排列</p>
+            <a className="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-ice hover:text-white" href={project.pdf} target="_blank" rel="noreferrer">
+              Open PDF
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+          <iframe className="h-[78vh] min-h-[560px] w-full bg-ink" src={`${project.pdf}#toolbar=1&navpanes=0`} title={`${project.name} PDF`} />
+        </div>
+      )}
+      {project.videos?.length > 0 && (
+        <div className="mt-6 space-y-5">
+          {project.videos.map((video) => (
+            <div key={video.src} className="border border-mist/12 bg-ink/80 p-4">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <p className="text-sm text-mist/60">{video.title}</p>
+                <a className="focus-ring inline-flex items-center gap-2 text-sm font-semibold text-ice hover:text-white" href={video.src} target="_blank" rel="noreferrer">
+                  Open Video
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
+              <video className="aspect-video w-full bg-black" src={video.src} poster={project.cover} controls preload="metadata" />
+            </div>
+          ))}
+        </div>
+      )}
     </article>
   );
 }

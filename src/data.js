@@ -46,6 +46,53 @@ export const projects = [
   }
 ];
 
+export const earlyWorks = [
+  {
+    id: "crm",
+    name: "企业 CRM｜销售与客户管理体验建设",
+    type: "ToB CRM / PC + 移动端 / 0-1",
+    time: "2021.10 - 2022.06",
+    cover: assetPath("assets/project4.jpg"),
+    pdf: assetPath("pdfs/crm.pdf"),
+    summary:
+      "面向家装建材行业销售、导购及管家等一线角色，从业务调研和用户访谈出发，重新梳理客户拓展、客户管理、预约到店及协同服务等核心场景，完成 CRM 产品从 0-1 的体验设计与落地。",
+    responsibility:
+      "负责项目设计策略、用户调研、业务流程拆解、信息架构、交互与视觉设计，并结合 PC 与移动端不同使用场景进行功能取舍和体验统一；同时沉淀弹窗、抽屉等交互规范，提升产品的一致性与可复用性。",
+    result:
+      "通过一线访谈和真实业务流程梳理，将复杂销售拓客流程拆解为明确任务节点，减少无效信息和操作路径；项目上线后成功推广至全门店使用，企业员工满意度提升，新用户问题数下降。"
+  },
+  {
+    id: "gkid",
+    name: "GKid 英语启蒙 App 0-1 体验设计",
+    type: "C端教育 / 儿童产品 / 移动端 App / 0-1",
+    time: "2020 - 2021",
+    cover: assetPath("assets/project5.jpg"),
+    pdf: assetPath("pdfs/gkid.pdf"),
+    summary:
+      "面向 3-8 岁儿童及家长的英语启蒙场景，从业务增长目标、用户角色与学习路径出发，完成 GKid 英语 App 从 0-1 的产品体验设计，覆盖课程购买、课程学习、绘本资源、成长激励及个人中心等核心模块。",
+    responsibility:
+      "负责产品整体体验设计及活动专题视觉设计，参与前期业务与用户分析、核心任务梳理、信息架构、交互及视觉方案设计；围绕“家长是购买决策者与辅学者、孩子是实际使用者”的双角色特点，平衡课程转化、持续学习与儿童使用体验。",
+    result:
+      "围绕“获客-激活-留存-转化-推荐”梳理产品增长路径，并通过课程任务、绘本资源、成长星激励等机制提升学习连续性与产品活跃；项目从 0 起步，累计付费用户 5K+。"
+  },
+  {
+    id: "promo-videos",
+    name: "一些宣传视频",
+    type: "企业宣传 / 视频制作",
+    time: "2022 - 2026",
+    cover: assetPath("assets/project6.jpg"),
+    videos: [
+      {
+        title: "宣传视频片段",
+        src: assetPath("videos/posvideo.mp4")
+      }
+    ],
+    summary: "汇总一些企业视频制作。",
+    responsibility:
+      "负责视频创意构思、视觉风格设计、分镜规划、动态设计及后期制作，并根据不同业务目标调整内容节奏与视觉表达。"
+  }
+];
+
 export const workExperience = [
   {
     title: "高级UI设计师",
