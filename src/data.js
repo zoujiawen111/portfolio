@@ -11,7 +11,7 @@ export const profile = {
   city: "上海",
   experience: "8年",
   birthday: "1996.11",
-  avatar: assetPath("assets/profile.jpg"),
+  avatar: assetPath("assets/profile.png"),
   tags: ["运动爱好者", "旅行上瘾者", "斜杠青年", "人间干饭人"],
   slogan: "连接业务与用户，设计更好的体验。"
 };
