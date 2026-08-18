@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         env:
-          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || '/' }}
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || '/portfolio/' }}
         run: npm run build
 
       - name: Upload artifact
