@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUp,
   BriefcaseBusiness,
+  Check,
   ChevronLeft,
+  Copy,
   ExternalLink,
   Mail,
   MapPin,
@@ -348,33 +350,68 @@ function Others() {
 }
 
 function Contact() {
+  const [copiedKey, setCopiedKey] = useState("");
   const cards = [
-    [Phone, "电话", contacts.phone],
-    [Mail, "邮箱", contacts.email],
-    [MapPin, "城市", profile.city]
+    [Phone, "电话", contacts.phone, true],
+    [Mail, "邮箱", contacts.email, true],
+    [MapPin, "城市", profile.city, false]
   ];
+
+  const handleCopy = async (label, value) => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = value;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
+      setCopiedKey(label);
+      window.setTimeout(() => setCopiedKey(""), 1600);
+    } catch {
+      setCopiedKey("");
+    }
+  };
 
   return (
     <section id="contact" className="section-pad pb-16">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 md:px-10">
         <SectionTitle eyebrow="Contact Me" title="Contact" />
         <div className="grid gap-5 md:grid-cols-3">
-          {cards.map(([Icon, label, value]) => (
-            <div key={label} className="border border-mist/12 bg-mist/[0.035] p-5">
-              <Icon className="h-6 w-6 text-ice" />
-              <p className="mt-7 text-sm text-mist/45">{label}</p>
-              <p className="mt-2 break-words text-lg font-bold text-ice">{value}</p>
-            </div>
+          {cards.map(([Icon, label, value, copyable]) => (
+            <ContactCard
+              key={label}
+              icon={Icon}
+              label={label}
+              value={value}
+              copyable={copyable}
+              copied={copiedKey === label}
+              onCopy={() => handleCopy(label, value)}
+            />
           ))}
-          <div className="border border-mist/12 bg-mist/[0.035] p-5 md:col-span-3">
+          <button
+            type="button"
+            className="focus-ring group border border-mist/12 bg-mist/[0.035] p-5 text-left transition hover:border-magenta/60 hover:bg-mist/[0.055] md:col-span-3"
+            onClick={() => handleCopy("微信", contacts.wechat)}
+            aria-label={`复制微信号 ${contacts.wechat}`}
+          >
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm text-mist/45">微信</p>
-                <p className="mt-2 text-lg font-bold text-ice">{contacts.wechat}</p>
+                <div className="flex items-center gap-2 text-sm text-mist/45">
+                  <span>微信</span>
+                  <CopyState copied={copiedKey === "微信"} />
+                </div>
+                <p className="mt-2 text-lg font-bold text-ice transition group-hover:text-white">{contacts.wechat}</p>
               </div>
               <img className="h-12 w-12 opacity-90" src={assetPath("assets/wx.svg")} alt="" aria-hidden="true" />
             </div>
-          </div>
+          </button>
         </div>
         <div className="mt-10 flex flex-col justify-between gap-4 border-t border-mist/12 pt-6 text-sm text-mist/42 sm:flex-row">
           <span>© 2026 Zou Jiawen. Portfolio Website.</span>
@@ -382,6 +419,43 @@ function Contact() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactCard({ icon: Icon, label, value, copyable, copied, onCopy }) {
+  if (!copyable) {
+    return (
+      <div className="border border-mist/12 bg-mist/[0.035] p-5">
+        <Icon className="h-6 w-6 text-ice" />
+        <p className="mt-7 text-sm text-mist/45">{label}</p>
+        <p className="mt-2 break-words text-lg font-bold text-ice">{value}</p>
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      className="focus-ring group border border-mist/12 bg-mist/[0.035] p-5 text-left transition hover:border-magenta/60 hover:bg-mist/[0.055]"
+      onClick={onCopy}
+      aria-label={`复制${label} ${value}`}
+    >
+      <div className="flex items-start justify-between gap-4">
+        <Icon className="h-6 w-6 text-ice" />
+        <CopyState copied={copied} />
+      </div>
+      <p className="mt-7 text-sm text-mist/45">{label}</p>
+      <p className="mt-2 break-words text-lg font-bold text-ice transition group-hover:text-white">{value}</p>
+    </button>
+  );
+}
+
+function CopyState({ copied }) {
+  return (
+    <span className={`inline-flex items-center gap-1 text-xs font-semibold transition ${copied ? "text-electricBlue" : "text-mist/42"}`}>
+      {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? "已复制" : "复制"}
+    </span>
   );
 }
 
